@@ -1,0 +1,59 @@
+##-Q1
+
+create table Customers(
+customerNumber int primary key , customerName varchar(50),contactLastName varchar (20),
+contactFirsttName varchar (20),phone int(13) ,addressLine1 varchar(100),
+ddressLine2 varchar(100) , city varchar(20),state varchar(20),postalCode varchar(10),
+country varchar(20),salesRepEmployeeNumber int(13),creditLimit varchar(20));
+
+
+Desc Customers;
+
+
+create table orders(
+ordernumber int primary key, orderdate datetime ,requiredDate datetime,shippedDate datetime,
+status varchar(10), comments varchar(100), customerNumber int ,FOREIGN KEY (customerNumber) REFERENCES Customers(customerNumber));
+
+
+select comments from orders;
+
+select orderdate , ordernumber from orders where orderdate =sysdate();
+
+select  employeNumber, lastName, firstName from employees;
+
+select a.ordernumber, b.customerName  
+from  order a , customers b 
+where a.CustomerNumber=b.CustomerNumber and customerName='';
+
+select customerName , salesRepEmployeeNumber from customers
+
+select paymentdate , amount  from payments;
+
+select productName, MSRP, productDescription from products;
+
+select a.productName, a.productDescription ,b.quantityOrdered from products a, orderdetails  b
+where b.productcode=a.productcode 
+order by b.quantityOrdered desc;
+
+select a.city , max(b.quantityOrdered) from customers a , orderdetails b , orders c
+where a.customerNumber=c.customerNumber and 
+c.orderNumber=b.orderNumber 
+group by a.city
+order by max(b.quantityOrdered) desc
+
+select state ,count(customerNumber) from customers
+group by state 
+orderby count(customerNumber) desc
+
+select employeeNumber , CONCAT(firstName, ' ', lastName) Full_Name  from employees
+
+select b.orderNumber , a.customerName ,b.quanityOrdered *b.priceEach as total_amount_paid from customers a , orderdetails b , orders c
+a.customerNumber=c.customerNumber and 
+c.orderNumber=b.orderNumber 
+
+
+
+
+
+
+
