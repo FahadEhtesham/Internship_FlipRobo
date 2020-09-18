@@ -1,0 +1,74 @@
+1] Linear Kernel is used when the data is Linearly separable, that is, it can be separated using a single Line. 
+It is one of the most common kernels to be used. It is mostly used when there are a Large number of Features in a particular Data Set. 
+One of the examples where there are a lot of features, is Text Classification, as each alphabet is a new feature. So we mostly use Linear Kernel in Text Classification
+
+Radial Basis Kernel is a kernel function that is used in machine learning to find a non-linear classifier or regression line.The main motive of the kernel is to do calculations in any d-dimensional space where d > 1, so that we can get a quadratic, cubic or any polynomial equation of large degree for our classification/regression line. Since Radial basis kernel uses exponent and as we know the expansion of e^x gives a polynomial equation of infinite power, so using this kernel, 
+we make our regression/classification line infinitely powerful too.
+
+In machine learning, the polynomial kernel is a kernel function commonly used with support vector machines (SVMs) and other kernelized models, that represents the similarity of vectors (training samples) 
+in a feature space over polynomials of the original variables, allowing learning of non-linear models.
+
+3]Sum of squares (SS) is a statistical tool that is used to identify the dispersion of data as well as how well the data can fit the model in regression analysis. The sum of squares got its name because it is calculated by finding the sum of the squared differences.
+ 
+ Formula:-TSS=summation of i to n = (yi-y_)**2 yi – the value in a sample
+ȳ – the mean value of a sample
+
+The Explained SS tells you how much of the variation in the dependent variable your model explained.
+Explained SS = Σ(Y-Hat – mean of Y)2.
+
+The residual sum of squares tells you how much of the dependent variable’s variation your model did not explain. It is the sum of the squared differences between the actual Y and the predicted Y:
+Residual Sum of Squares = Σ e2
+
+4]Gini index or Gini impurity measures the degree or probability of a particular variable being wrongly classified when it is randomly chosen. But what is actually meant by ‘impurity’? If all the elements belong to a single class, then it can be called pure. The degree of Gini index varies between 0 and 1, where 0 denotes that all elements belong to a certain class or if there exists only one class, and 1 denotes that the elements are randomly distributed across various classes. A Gini Index of 0.5 denotes equally distributed elements into some classes.
+
+5]Yes , beacuse In decision trees, over-fitting occurs when the tree is designed so as to perfectly fit all samples in the training data set. Thus it ends up with branches with strict rules of sparse data. Thus this effects the accuracy when predicting samples that are not part of the training set.
+
+6]Ensemble methods are techniques that create multiple models and then combine them to produce improved results. Ensemble methods usually produces more accurate solutions than a single model would. This has been the case in a number of machine learning competitions, where the winning solutions used ensemble methods.
+
+7]Differences Between Bagging and Boosting –
+
+Bagging:-
+1] Simplest way of combining predictions that
+belong to the same type.
+2]Aim to decrease variance, not bias.
+3]Each model receives equal weight.
+4]Each model is built independently.
+
+Boosting:-
+1)A way of combining predictions that
+belong to the different types
+
+2)Aim to decrease bias, not variance.
+3)Models are weighted according to their performance.
+4)New models are influenced
+by performance of previously built models.
+
+8]Out-of-bag (OOB) error, also called out-of-bag estimate, is a method of measuring the prediction error of random forests, boosted decision trees, and other machine learning models utilizing bootstrap aggregating (bagging) to sub-sample data samples used for training.
+
+9]Cross-validation is a resampling procedure used to evaluate machine learning models on a limited data sample.
+
+The procedure has a single parameter called k that refers to the number of groups that a given data sample is to be split into. As such, the procedure is often called k-fold cross-validation. When a specific value for k is chosen, it may be used in place of k in the reference to the model, such as k=10 becoming 10-fold cross-validation.
+
+Cross-validation is primarily used in applied machine learning to estimate the skill of a machine learning model on unseen data. That is, to use a limited sample in order to estimate how the model is expected to perform in general when used to make predictions on data not used during the training of the model.
+
+It is a popular method because it is simple to understand and because it generally results in a less biased or less optimistic estimate of the model skill than other methods, such as a simple train/test split.
+
+10]A hyperparameter is a parameter whose value is set before the learning process begins.
+In machine learning, hyperparameter optimization or tuning is the problem of choosing a set of optimal hyperparameters for a learning algorithm. A hyperparameter is a parameter whose value is used to control the learning process. By contrast, the values of other parameters (typically node weights) are learned
+
+11]A learning rate that is too large can cause the model to converge too quickly to a suboptimal solution, whereas a learning rate that is too small can cause the process to get stuck.
+
+12]If the algorithm is too simple (hypothesis with linear eq.) then it may be on high bias and low variance condition and thus is error-prone. If algorithms fit too complex ( hypothesis with high degree eq.) then it may be on high variance and low bias. In the latter condition, the new entries will not perform well. Well, there is something between both of these conditions, known as Trade-off or Bias Variance Trade-off.
+
+13]Regularisation is a technique used to reduce the errors by fitting the function appropriately on the given training set and avoid overfitting.
+The commonly used regularisation techniques are :
+L1 regularisation
+L2 regularisation
+Dropout regularisation
+
+14]Gradient boosting generates learners during the learning process. It build first learner to predict the values/labels of samples, and calculate the loss (the difference between the outcome of the first learner and the real value). It will build a second learner to predict the loss after the first step. The step continues to learn the third, forth… until certain threshold.
+
+Adaboost requires users specify a set of weak learners (alternatively, it will randomly generate a set of weak learner before the real learning process). It will learn the weights of how to add these learners to be a strong learner. The weight of each learner is learned by whether it predicts a sample correctly or not. If a learner is mispredict a sample, the weight of the learner is reduced a bit. It will repeat such process until converge.
+
+15]Because the decision boundary is linear in  x .To be more specific, the decision boundary in this case is given by  wTx=0  (a hyperplane). 
+Logistic regression has traditionally been used to come up with a hyperplane that separates the feature space into classes. But if we suspect that the decision boundary is nonlinear we may get better results by attempting some nonlinear functional forms for the logit function 
