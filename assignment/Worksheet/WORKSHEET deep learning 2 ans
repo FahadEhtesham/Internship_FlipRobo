@@ -1,0 +1,36 @@
+----------------WORKSHEET-2  DEEP LEARNING----------------
+1) C
+
+2) A
+
+3) C 
+
+4) B 
+
+5) C 
+
+6) B 
+
+7) B
+
+8) B 
+
+9) ABCD
+
+10) BCD
+
+11) SIGMOID
+
+12) ver ysmall learning rates in sigmoid activation unit would lead to vanishing gradient , that the weights will be stuck at local minima , whereas in high weights will lead to exploding gradient in tanh activation
+
+13)
+
+14) What Are Exploding Gradients?
+An error gradient is the direction and magnitude calculated during the training of a neural network that is used to update the network weights in theright direction and by the right amount.
+In deep networks or recurrent neural networks, error gradients can accumulate during an update and result in very large gradients. These in turn result in large updates to the network weights, and in turn, an unstable network. At an extreme, the values of weights can become so large as to overflow and result in NaN values.
+The explosion occurs through exponential growth by repeatedly multiplying gradients through the network layers that have values larger than 1.0.
+
+In machine learning, the vanishing gradient problem is encountered when training artificial neural networks with gradient-based learning methods and backpropagation. In such methods, each of the neural network's weights receive an update proportional to the partial derivative of the error function with respect to the current weight in each iteration of training. The problem is that in some cases, the gradient will be vanishingly small, effectively preventing the weight from changing its value. In the worst case, this may completely stop the neural network from further training. As one example of the problem cause, traditional activation functions such as the hyperbolic tangent function have gradients in the range (-1, 1), and backpropagation computes gradients by the chain rule. This has the effect of multiplying n of these small numbers to compute gradients of the "front" layers in an n-layer network, meaning that the gradient (error signal) decreases exponentially with n while the front layers train very slowly.
+
+
+15) Iterations is the number of batches of data the algorithm has seen (or simply the number of passes the algorithm has done on the dataset). Epochs is the number of times a learning algorithm sees the complete dataset.Total number of training examples present in a single batch.
