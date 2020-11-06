@@ -1,0 +1,97 @@
+1]A
+2]C
+3]A
+4]B
+5]A
+6]B
+7]A
+8]D
+9] ABC
+10]ABD
+
+11]If we do not apply a Activation function then the output signal would simply be a simple linear function.
+
+12]In the forward propagation, we check what the neural network predicts for the first training example with initial weights and bias. First, we initialize the weights and bias randomly and then we calculate the weighted sum of activation and bias, after we have found weighted sum , we can apply the activation function to it.The most common activation functions are relu, sigmoid and tanh. In this example, we are going to use tanh.
+
+Forward propagation (or forward pass) refers to the calculation and storage of intermediate variables (including outputs) for a neural network in order from the input layer to the output layer. We now work step-by-step through the mechanics of a neural network with one hidden layer. This may seem tedious but in the eternal words of funk virtuoso James Brown, you must “pay the cost to be the boss”.
+For the sake of simplicity, let us assume that the input example is  x∈Rd  and that our hidden layer does not include a bias term. Here the intermediate variable is:
+
+z=W(1)x,
+ 
+where  W(1)∈Rh×d  is the weight parameter of the hidden layer. After running the intermediate variable  z∈Rh  through the activation function  ϕ  we obtain our hidden activation vector of length  h ,
+
+h=ϕ(z).
+ 
+The hidden variable  h  is also an intermediate variable. Assuming that the parameters of the output layer only possess a weight of  W(2)∈Rq×h , we can obtain an output layer variable with a vector of length  q :
+
+o=W(2)h.
+ 
+Assuming that the loss function is  l  and the example label is  y , we can then calculate the loss term for a single data example,
+
+
+L=l(o,y).
+ 
+According to the definition of  L2  regularization, given the hyperparameter  λ , the regularization term is
+
+(4.7.5)
+s=λ2(∥W(1)∥2F+∥W(2)∥2F),
+ 
+where the Frobenius norm of the matrix is simply the  L2  norm applied after flattening the matrix into a vector. Finally, the model’s regularized loss on a given data example is:
+
+J=L+s.
+ 
+Backpropagation refers to the method of calculating the gradient of neural network parameters. In short, the method traverses the network in reverse order, from the output to the input layer, according to the chain rule from calculus. The algorithm stores any intermediate variables (partial derivatives) required while calculating the gradient with respect to some parameters. Assume that we have functions  Y=f(X)  and  Z=g(Y) , in which the input and the output  X,Y,Z  are tensors of arbitrary shapes. By using the chain rule, we can compute the derivative of  Z  with respect to  X  via
+
+
+∂Z∂X=prod(∂Z∂Y,∂Y∂X).
+ 
+Here we use the  prod  operator to multiply its arguments after the necessary operations, such as transposition and swapping input positions, have been carried out. For vectors, this is straightforward: it is simply matrix-matrix multiplication. For higher dimensional tensors, we use the appropriate counterpart. The operator  prod  hides all the notation overhead.
+
+Recall that the parameters of the simple network with one hidden layer, whose computational graph is in Fig. 4.7.1, are  W(1)  and  W(2) . The objective of backpropagation is to calculate the gradients  ∂J/∂W(1)  and  ∂J/∂W(2) . To accomplish this, we apply the chain rule and calculate, in turn, the gradient of each intermediate variable and parameter. The order of calculations are reversed relative to those performed in forward propagation, since we need to start with the outcome of the computational graph and work our way towards the parameters. The first step is to calculate the gradients of the objective function  J=L+s  with respect to the loss term  L  and the regularization term  s .
+
+
+∂J∂L=1and∂J∂s=1.
+ 
+Next, we compute the gradient of the objective function with respect to variable of the output layer  o  according to the chain rule:
+
+
+∂J∂o=prod(∂J∂L,∂L∂o)=∂L∂o∈Rq.
+ 
+Next, we calculate the gradients of the regularization term with respect to both parameters:
+
+∂s∂W(1)=λW(1)and∂s∂W(2)=λW(2).
+ 
+Now we are able to calculate the gradient  ∂J/∂W(2)∈Rq×h  of the model parameters closest to the output layer. Using the chain rule yields:
+
+
+∂J∂W(2)=prod(∂J∂o,∂o∂W(2))+prod(∂J∂s,∂s∂W(2))=∂J∂oh⊤+λW(2).
+ 
+To obtain the gradient with respect to  W(1)  we need to continue backpropagation along the output layer to the hidden layer. The gradient with respect to the hidden layer’s outputs  ∂J/∂h∈Rh  is given by
+
+
+∂J∂h=prod(∂J∂o,∂o∂h)=W(2)⊤∂J∂o.
+ 
+Since the activation function  ϕ  applies elementwise, calculating the gradient  ∂J/∂z∈Rh  of the intermediate variable  z  requires that we use the elementwise multiplication operator, which we denote by  ⊙ :
+
+
+∂J∂z=prod(∂J∂h,∂h∂z)=∂J∂h⊙ϕ′(z).
+ 
+Finally, we can obtain the gradient  ∂J/∂W(1)∈Rh×d  of the model parameters closest to the input layer. According to the chain rule, we get
+
+
+∂J∂W(1)=prod(∂J∂z,∂z∂W(1))+prod(∂J∂s,∂s∂W(1))=∂J∂zx⊤+λW(1).
+
+
+
+13] a)Stochastic gradient descent (often abbreviated SGD) is an iterative method for optimizing an objective function with suitable smoothness properties (e.g. differentiable or subdifferentiable). It can be regarded as a stochastic approximation of gradient descent optimization, since it replaces the actual gradient (calculated from the entire data set) by an estimate thereof (calculated from a randomly selected subset of the data). Especially in high-dimensional optimization problems this reduces the computational burden, achieving faster iterations in trade for a lower convergence rate.
+
+b)Batch :-  Batch Gradient Descent involves calculations over the full training set at each step as a result of which it is very slow on very large training data. Thus, it becomes very computationally expensive to do Batch GD. However, this is great for convex or relatively smooth error manifolds. Also, Batch GD scales well with the number of features.
+It is Slow and computationally expensive algorithm , Computes gradient using the whole Training sample, Convergence is slow.
+
+c) Mini-batch gradient descent is a variation of the gradient descent algorithm that splits the training dataset into small batches that are used to calculate model error and update model coefficients. Implementations may choose to sum the gradient over the mini-batch which further reduces the variance of the gradient.
+
+14]a) Easily fits in the memory.b) It is computationally efficient.c) Benefit from vectorization.d) If stuck in local minimums, some noisy steps can lead the way out of them.
+Average of the training samples produces stable error gradients and convergence.
+
+15]Transfer learning is the reuse of a pre-trained model on a new problem.
+It's currently very popular in deep learning because it can train deep neural networks with comparatively little data.
